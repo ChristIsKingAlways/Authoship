@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { Card, CardHeader } from '@/components/ui'
 import ProfileForm from './ProfileForm'
+import type { Profile } from '@/types'
 
 export default async function ProfilePage() {
   const supabase = await createClient()
@@ -14,11 +15,13 @@ export default async function ProfilePage() {
     redirect('/login')
   }
 
-  const { data: profile } = await supabase
+  const { data } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .single()
+  
+  const profile = data as Profile | null
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

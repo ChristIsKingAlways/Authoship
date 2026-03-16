@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { Card, CardHeader, Button } from '@/components/ui'
 import DashboardCard from '@/components/dashboard/DashboardCard'
+import type { Profile } from '@/types'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -15,11 +16,13 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
-  const { data: profile } = await supabase
+  const { data } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .single()
+  
+  const profile = data as Profile | null
 
   const memberSince = user.created_at
     ? new Date(user.created_at).toLocaleDateString('en-US', {
