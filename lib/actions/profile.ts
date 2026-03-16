@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import type { Profile } from '@/types'
 
 export async function updateProfile(formData: FormData) {
   const supabase = await createClient()
@@ -20,11 +21,10 @@ export async function updateProfile(formData: FormData) {
     return { error: 'Not authenticated' }
   }
 
-  const { error } = await supabase
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { error } = await (supabase as any)
     .from('profiles')
-    .update({
-      full_name: fullName.trim(),
-    })
+    .update({ full_name: fullName.trim() })
     .eq('id', user.id)
 
   if (error) {
@@ -37,7 +37,7 @@ export async function updateProfile(formData: FormData) {
   return { success: 'Profile updated successfully' }
 }
 
-export async function getProfile() {
+export async function getProfile(): Promise<Profile | null> {
   const supabase = await createClient()
 
   const {
@@ -48,11 +48,11 @@ export async function getProfile() {
     return null
   }
 
-  const { data: profile } = await supabase
+  const { data } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .single()
 
-  return profile
+  return data as Profile | null
 }
