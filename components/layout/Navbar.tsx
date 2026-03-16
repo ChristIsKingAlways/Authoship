@@ -45,7 +45,7 @@ export default function Navbar({ user }: NavbarProps) {
                   />
                 </svg>
               </div>
-              <span className="font-bold text-xl text-gray-900">AuthStarter</span>
+              <span className="font-bold text-xl text-gray-900">Authoship</span>
             </Link>
           </div>
 

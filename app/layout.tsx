@@ -7,8 +7,8 @@ import { createClient } from '@/lib/supabase/server'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Auth Starter Portfolio App',
-  description: 'A production-ready authentication system built with Next.js 15, Supabase, and TypeScript',
+  title: 'Authoship',
+  description: 'Production-ready authentication starter kit built with Next.js 15, Supabase, and TypeScript',
 }
 
 export default async function RootLayout({

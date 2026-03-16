@@ -1,7 +1,7 @@
 {
-  "name": "auth-starter-portfolio",
+  "name": "authoship",
   "version": "1.0.0",
-  "description": "Production-ready authentication system with Next.js 15, Supabase, and TypeScript",
+  "description": "Production-ready authentication starter kit with Next.js 15, Supabase, and TypeScript",
   "private": true,
   "scripts": {
     "dev": "next dev",

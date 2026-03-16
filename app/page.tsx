@@ -20,8 +20,8 @@ export default async function HomePage() {
               <span className="block text-primary-600">Made Simple</span>
             </h1>
             <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-              A production-ready authentication system built with Next.js 15, Supabase, 
-              and TypeScript. Perfect for your next project or portfolio.
+              A production-ready authentication starter kit built with Next.js 15, Supabase, 
+              and TypeScript. Ship secure auth in minutes, not days.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               {user ? (
@@ -129,10 +129,7 @@ export default async function HomePage() {
       <footer className="py-8 bg-gray-900 text-gray-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p>
-            Built with Next.js 15, Supabase & TypeScript.
-            <span className="block sm:inline sm:ml-1">
-              A portfolio project demonstrating full-stack authentication.
-            </span>
+            Authoship — Built with Next.js 15, Supabase & TypeScript.
           </p>
         </div>
       </footer>
