@@ -120,3 +120,56 @@ export async function resetPassword(formData: FormData) {
   revalidatePath('/', 'layout')
   redirect('/dashboard')
 }
+
+export async function changePassword(formData: FormData) {
+  const supabase = await createClient()
+
+  const currentPassword = formData.get('currentPassword') as string
+  const newPassword = formData.get('newPassword') as string
+  const confirmPassword = formData.get('confirmPassword') as string
+
+  if (!currentPassword || !newPassword || !confirmPassword) {
+    return { error: 'All password fields are required' }
+  }
+
+  if (newPassword !== confirmPassword) {
+    return { error: 'New passwords do not match' }
+  }
+
+  if (newPassword.length < 6) {
+    return { error: 'New password must be at least 6 characters' }
+  }
+
+  if (currentPassword === newPassword) {
+    return { error: 'New password must be different from current password' }
+  }
+
+  // Verify current password by re-authenticating
+  const { data: { user } } = await supabase.auth.getUser()
+  
+  if (!user?.email) {
+    return { error: 'User not found' }
+  }
+
+  // Try to sign in with current password to verify it
+  const { error: signInError } = await supabase.auth.signInWithPassword({
+    email: user.email,
+    password: currentPassword,
+  })
+
+  if (signInError) {
+    return { error: 'Current password is incorrect' }
+  }
+
+  // Update to new password
+  const { error: updateError } = await supabase.auth.updateUser({
+    password: newPassword,
+  })
+
+  if (updateError) {
+    return { error: updateError.message }
+  }
+
+  revalidatePath('/settings/security')
+  return { success: 'Password updated successfully' }
+}

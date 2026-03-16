@@ -11,8 +11,11 @@ A production-ready authentication starter kit built with Next.js 15, Supabase, T
 
 - **Email Authentication** - Sign up and login with email/password
 - **Password Recovery** - Secure password reset via email
+- **Change Password** - Update password from account settings
 - **Protected Routes** - Middleware-based route protection
 - **User Profiles** - Automatic profile creation on signup
+- **Avatar Upload** - Upload and manage profile pictures
+- **Account Settings** - Manage preferences and delete account
 - **Session Persistence** - Sessions survive page refreshes
 - **Row Level Security** - Database-level security with Supabase RLS
 - **Responsive Design** - Mobile-first UI with Tailwind CSS
@@ -54,6 +57,7 @@ This creates:
 - `profiles` table linked to `auth.users`
 - Row Level Security policies
 - Auto-create profile trigger on signup
+- `avatars` storage bucket with RLS policies
 
 ### 3. Configure Environment
 
@@ -92,8 +96,10 @@ Open [http://localhost:3000](http://localhost:3000)
 │   ├── dashboard/          # Protected dashboard
 │   ├── forgot-password/    # Password recovery
 │   ├── login/              # Login page
-│   ├── profile/            # Profile settings
+│   ├── profile/            # Profile settings + avatar upload
 │   ├── reset-password/     # Password reset
+│   ├── settings/           # Account settings
+│   ├── settings/security/  # Password change
 │   ├── signup/             # Registration
 │   ├── globals.css
 │   ├── layout.tsx

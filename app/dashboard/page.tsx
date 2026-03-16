@@ -124,11 +124,19 @@ export default async function DashboardPage() {
           />
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
-                <span className="text-2xl font-bold text-primary-600">
-                  {profile?.full_name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || '?'}
-                </span>
-              </div>
+              {profile?.avatar_url ? (
+                <img
+                  src={profile.avatar_url}
+                  alt="Avatar"
+                  className="w-16 h-16 rounded-full object-cover"
+                />
+              ) : (
+                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl font-bold text-primary-600">
+                    {profile?.full_name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || '?'}
+                  </span>
+                </div>
+              )}
               <div>
                 <p className="font-semibold text-gray-900">
                   {profile?.full_name || 'No name set'}
@@ -195,8 +203,11 @@ export default async function DashboardPage() {
               </div>
             </Link>
 
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 opacity-60 cursor-not-allowed">
-              <div className="p-2 bg-gray-200 rounded-lg text-gray-500">
+            <Link
+              href="/settings"
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              <div className="p-2 bg-purple-100 rounded-lg text-purple-600">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -213,13 +224,16 @@ export default async function DashboardPage() {
                 </svg>
               </div>
               <div>
-                <p className="font-medium text-gray-500">Account Settings</p>
-                <p className="text-sm text-gray-400">Coming soon</p>
+                <p className="font-medium text-gray-900">Account Settings</p>
+                <p className="text-sm text-gray-500">Preferences and data</p>
               </div>
-            </div>
+            </Link>
 
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 opacity-60 cursor-not-allowed">
-              <div className="p-2 bg-gray-200 rounded-lg text-gray-500">
+            <Link
+              href="/settings/security"
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              <div className="p-2 bg-green-100 rounded-lg text-green-600">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -230,10 +244,10 @@ export default async function DashboardPage() {
                 </svg>
               </div>
               <div>
-                <p className="font-medium text-gray-500">Security</p>
-                <p className="text-sm text-gray-400">Coming soon</p>
+                <p className="font-medium text-gray-900">Security</p>
+                <p className="text-sm text-gray-500">Password and sessions</p>
               </div>
-            </div>
+            </Link>
           </div>
         </Card>
       </div>
